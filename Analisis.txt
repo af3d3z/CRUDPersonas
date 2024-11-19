@@ -1,0 +1,53 @@
+Capa ENT:
+	public class Persona:
+	// atributos
+		- Int _id
+		- String _nombre
+		- String _apellidos
+		- String _foto
+		- String _telefono
+		- String _direccion
+		- DateTime _fechaNacimiento
+	// parametros
+		+ Int ID {get}
+		+ String Nombre {get;set;}
+		+ String Apellidos {get;set;}
+		+ String Foto {get;set;}
+		+ String Telefono {get;set;}
+		+ String Direccion {get;set;}
+		+ DateTime FechaNacimiento {get;set;}
+	// constructores
+		+ Persona()
+		+ Persona(id, nombre, apellidos, foto, telefono, direccion, fechaNacimiento)
+
+	public class Departamento:
+	// atributos
+		- int _id
+		- string _nombre
+	// parametros
+		+ Int ID {get}
+		+ String Nombre {get;set}
+	// constructores
+		+ Departamento()
+		+ Departamento(id, nombre)
+
+
+Capa DAL:
+	public class ConexionDB:
+		+ static SqlConnection GetConexion()
+
+	public class Listado:
+		+ static List<Persona> GetListadoPersonasDAL()
+		+ static List<Departamentos> GetListadoDepartamentosDAL()
+
+	public class CRUDPersonas:
+		+ static Persona GetPersona(int id)
+		+ static AgregarPersona(Persona p)
+		+ static ModificarPersona(Persona p)
+		+ static BorrarPersona(int id)
+
+	public class CRUDDepartamentos:
+		+ static Departamento GetDepartamento(int id)
+		+ static AgregarDepartamento(Departamento dpto)
+		+ static ModificarDepartamento(Departamento dpto)
+		+ static BorrarDepartamento(int id)
