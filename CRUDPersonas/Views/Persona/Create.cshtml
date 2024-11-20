@@ -24,8 +24,8 @@
                 <input class="form-control" type="text" name="Direccion" required />
                 <label class="form-label" for="fechaNac">Fecha de nacimiento:</label>
                 <input class="form-control" type="date" name="FechaNacimiento" required />
-                <label class="form-label" for="iddepartamento">Departamento: </label>
-                <select class="form-select" for="IDDepartamento" required>
+                <label class="form-label" for="IDDepartamento">Departamento: </label>
+                <select class="form-select" name="IDDepartamento" required>
                     @foreach (var depto in Model)
                     {
                         <option value="@depto.ID">@depto.Nombre</option>
