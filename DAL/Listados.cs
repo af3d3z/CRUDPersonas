@@ -66,7 +66,7 @@ namespace DAL
             try
             {
                 SqlConnection conn = ConexionDB.GetConexion();
-                cmd.CommandText = "SELECT * FROM Departamento";
+                cmd.CommandText = "SELECT * FROM Departamentos";
                 cmd.Connection = conn;
                 reader = cmd.ExecuteReader();
 

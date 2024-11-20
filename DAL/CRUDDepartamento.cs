@@ -42,5 +42,73 @@ namespace DAL
 
             return departamento;
         }
+
+        /// <summary>
+        /// Agrega un departamento a la base de datos
+        /// </summary>
+        /// <param name="dpto"></param>
+        /// <returns>Devuelve el número de filas afectadas, si es uno, es que se ha completado la operación.</returns>
+        public static int AgregarDepartamento(Departamento dpto) {
+            int affectedRows = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = dpto.ID;
+            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = dpto.Nombre;
+            try
+            {
+                SqlConnection conn = ConexionDB.GetConexion();
+                cmd.CommandText = "INSERT INTO Departamentos VALUES (@id, @nombre)";
+                cmd.Connection = conn;
+                affectedRows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            return affectedRows;
+        }
+
+        /// <summary>
+        /// Modifica un departamento de la base de datos
+        /// </summary>
+        /// <param name="dpto">Departamento a actualizar</param>
+        /// <returns>Devuelve el número de filas afectadas, si es uno, es que se ha completado la operación.</returns>
+        public static int ModificarDepartamento(Departamento dpto) { 
+            int affectedRows = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = dpto.ID;
+            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = dpto.Nombre;
+            try
+            {
+                SqlConnection conn = ConexionDB.GetConexion();
+                cmd.CommandText = "UPDATE Departamentos WHERE ID = @id SET Nombre = @nombre";
+                cmd.Connection = conn;
+                affectedRows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            return affectedRows;
+        }
+
+        /// <summary>
+        /// Borra un departamento de la base de datos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Devuelve el número de filas afectadas, si es uno, es que se ha completado la operación.</returns>
+        public static int BorrarDepartamento(int id) {
+            int affectedRows = 0;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+            try
+            {
+                SqlConnection conn = ConexionDB.GetConexion();
+                cmd.CommandText = "DELETE FROM Departamentos WHERE ID = @id";
+                cmd.Connection = conn;
+                affectedRows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            return affectedRows;
+        }
     }
 }

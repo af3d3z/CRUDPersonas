@@ -42,12 +42,36 @@ Capa DAL:
 
 	public class CRUDPersonas:
 		+ static Persona GetPersona(int id)
-		+ static AgregarPersona(Persona p)
-		+ static ModificarPersona(Persona p)
-		+ static BorrarPersona(int id)
+		+ static int AgregarPersona(Persona p)
+		+ static int ModificarPersona(Persona p)
+		+ static int BorrarPersona(int id)
 
 	public class CRUDDepartamentos:
 		+ static Departamento GetDepartamento(int id)
-		+ static AgregarDepartamento(Departamento dpto)
-		+ static ModificarDepartamento(Departamento dpto)
-		+ static BorrarDepartamento(int id)
+		+ int static AgregarDepartamento(Departamento dpto)
+		+ int static ModificarDepartamento(Departamento dpto)
+		+ int static BorrarDepartamento(int id)
+
+	Capa UI:
+		ViewModels ASP:
+			class PersonaDepartamentoVM
+				// atributos
+				- Persona _persona
+				- Departamento _departamento
+				// propiedades
+				+ Persona {get;set;}
+				+ Departamento {get;set;}
+				// constructores
+				+ PersonaDepartamentosVM()
+				+ PersonaDepartamentosVM(Persona p)
+
+			class PersonaDepartamentoListaDepartamentosVM
+				// atributos
+				- PersonaDepartamentoVM _personaDepartamento
+				- List<Departamento> _departamentos
+				// propiedades
+				+ PersonaDepartamentoVM {get;set;}
+				+ Departamentos {get;}
+				// constructores
+				+ PersonaListaDepartamentos()
+				+ PersonaListaDepartamentos(PersonaDepartamentoVM)

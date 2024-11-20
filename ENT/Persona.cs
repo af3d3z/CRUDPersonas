@@ -83,6 +83,17 @@
             this._idDepartamento = idDepartamento;
         }
 
+        public Persona(string nombre, string apellidos, string foto, string telefono, string direccion, DateTime fechaNacimiento, int idDepartamento)
+        {
+            this._nombre = nombre;
+            this._apellidos = apellidos;
+            this._foto = foto;
+            this._telefono = telefono;
+            this._direccion = direccion;
+            this._fechaNacimiento = fechaNacimiento;
+            this._idDepartamento = idDepartamento;
+        }
+
 
         #endregion
     }

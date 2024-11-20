@@ -24,7 +24,7 @@ namespace DAL
             try
             {
                 SqlConnection conn = ConexionDB.GetConexion();
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                cmd.Parameters.AddWithValue("@id", "id");
                 cmd.CommandText = "SELECT * FROM Personas WHERE ID = @id";
                 cmd.Connection = conn;
                 reader = cmd.ExecuteReader();
@@ -73,7 +73,6 @@ namespace DAL
             cmd.Parameters.Add("@idDepartamento", System.Data.SqlDbType.Int).Value = persona.IDDepartamento;
 
             try {
-
                 SqlConnection conn = ConexionDB.GetConexion();
                 cmd.CommandText = "INSERT INTO Personas VALUES (@id, @nombre, @apellidos, @telefono, @direccion, @foto, @fechaNac, @idDepartamento)";
                 cmd.Connection = conn;

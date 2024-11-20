@@ -2,6 +2,7 @@
 using ENT;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace CRUDPersonas.Controllers
 {
@@ -44,22 +45,41 @@ namespace CRUDPersonas.Controllers
         // GET: PersonaController/Create
         public ActionResult Create()
         {
-            return View();
+            List<Departamento> departamentos = new List<Departamento>();
+            try
+            {
+                departamentos = DAL.Listados.GetListadoDepartamentosDAL();
+            }
+            catch (Exception e) {
+                throw e;
+            }
+            return View(departamentos);
         }
 
         // POST: PersonaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Persona persona)
         {
+            List<Departamento> departamentos = new List<Departamento>();
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                int res = DAL.CRUDPersona.AgregarPersona(persona);
+                if (res != 1)
+                {
+                    //TODO: Vista de error
+                }
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return View("Error", new ErrorVM(e));
             }
+            finally {
+                departamentos = DAL.Listados.GetListadoDepartamentosDAL();
+            }
+            return View(departamentos);
+
         }
 
         // GET: PersonaController/Edit/5
@@ -71,7 +91,7 @@ namespace CRUDPersonas.Controllers
         // POST: PersonaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Persona persona)
         {
             try
             {
