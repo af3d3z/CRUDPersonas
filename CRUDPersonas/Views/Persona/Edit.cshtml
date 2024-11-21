@@ -1,0 +1,47 @@
+﻿@model CRUDPersonas.Models.ViewModels.PersonaListaDepartamentos
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PersonaListaDepartamentos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="form-label" for="nombre">Nombre: </label>
+                <input class="form-control" type="text" name="Nombre" value="@Model.Persona.Nombre" required />
+                <label class="form-label" for="apellidos">Apellidos: </label>
+                <input class="form-control" type="text" name="Apellidos" value="@Model.Persona.Apellidos" required />
+                <label class="form-label" for="foto">URL Foto:</label>
+                <input class="form-control" type="text" name="Foto" value="@Model.Persona.Foto" required />
+                <label class="form-label" for="telefono">Teléfono:</label>
+                <input class="form-control" name="Telefono" value="@Model.Persona.Telefono" required />
+                <label class="form-label" for="direccion">Dirección:</label>
+                <input class="form-control" type="text" name="Direccion" value="@Model.Persona.Direccion" required />
+                <label class="form-label" for="fechaNac">Fecha de nacimiento:</label>
+                <input class="form-control" type="date" name="FechaNacimiento" value="@Model.Persona.FechaNacimiento" required />
+                <label class="form-label" for="IDDepartamento">Departamento: </label>
+                <select class="form-select" name="IDDepartamento" required>
+                    @foreach (var depto in Model.ListadoDepartamentos)
+                    {
+                        <option value="@depto.ID" selected='@(Model.Persona.IDDepartamento == depto.ID ? "selected" : "")'>@depto.Nombre</option>
+                    }
+                </select>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

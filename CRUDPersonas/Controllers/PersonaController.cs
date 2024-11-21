@@ -2,6 +2,7 @@
 using ENT;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System.Globalization;
 
 namespace CRUDPersonas.Controllers
@@ -21,9 +22,12 @@ namespace CRUDPersonas.Controllers
                     personasDepartamento.Add(personaDpto);
                 }
             }
-            catch (Exception e) 
+            catch (SqlException e)
             {
-                throw e;
+                return View("Error", new ErrorVM(new Exception("No se ha podido acceder a la base de datos")));
+            }
+            catch (Exception e) {
+                return View("Error", new ErrorVM(e));
             }
             return View(personasDepartamento);
         }
@@ -37,7 +41,7 @@ namespace CRUDPersonas.Controllers
                 persona = new PersonaDepartamentoVM(DAL.CRUDPersona.GetPersona(id));
             }
             catch (Exception e) {
-                throw e;
+                return View("Error", new ErrorVM(e));
             }
             return View(persona);
         }
@@ -68,7 +72,7 @@ namespace CRUDPersonas.Controllers
                 int res = DAL.CRUDPersona.AgregarPersona(persona);
                 if (res != 1)
                 {
-                    //TODO: Vista de error
+                    return View("Error", new ErrorVM(new Exception("No se ha podido añadir la persona")));
                 }
             }
             catch (Exception e)
@@ -85,42 +89,65 @@ namespace CRUDPersonas.Controllers
         // GET: PersonaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            PersonaListaDepartamentos persona = new PersonaListaDepartamentos();
+
+            try
+            {
+                persona = new PersonaListaDepartamentos(DAL.CRUDPersona.GetPersona(id));
+            }
+            catch (Exception e) {
+                return View("Error", new ErrorVM(e));
+            }
+            return View(persona);
         }
 
         // POST: PersonaController/Edit/5
         [HttpPost]
+        [ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Persona persona)
+        public ActionResult EditPost(int id)
         {
             try
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return View("Error", new ErrorVM(e));
             }
         }
 
         // GET: PersonaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Persona persona;
+            try
+            {
+                persona = DAL.CRUDPersona.GetPersona(id);
+            }
+            catch (Exception e) {
+                return View("Error", new ErrorVM(e));
+            }
+            return View(persona);
         }
 
         // POST: PersonaController/Delete/5
         [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Persona persona)
+        public ActionResult DeletePost(int id)
         {
             try
             {
+                int res = DAL.CRUDPersona.BorrarPersona(id);
+                if (res != 1) {
+                    return View("Error", new ErrorVM(new Exception("No se ha podido borrar la persona")));
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return View("Error", new ErrorVM(e));
             }
         }
     }

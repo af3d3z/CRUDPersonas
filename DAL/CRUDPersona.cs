@@ -14,6 +14,8 @@ namespace DAL
     {
         /// <summary>
         /// Devuelve una persona de la base de datos a partir de su id
+        /// Pre: El id deberá ser mayor a 0
+        /// Post: Si no se encuentra, devolverá una persona vacía
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Persona de la base de datos con ese ID</returns>
@@ -21,35 +23,39 @@ namespace DAL
             Persona persona = new Persona();
             SqlDataReader reader;
             SqlCommand cmd = new SqlCommand();
-            try
-            {
-                SqlConnection conn = ConexionDB.GetConexion();
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                cmd.CommandText = "SELECT * FROM Personas WHERE ID = @id";
-                cmd.Connection = conn;
-                reader = cmd.ExecuteReader();
+            if (id > 0) {
+                try
+                {
+                    SqlConnection conn = ConexionDB.GetConexion();
+                    cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    cmd.CommandText = "SELECT * FROM Personas WHERE ID = @id";
+                    cmd.Connection = conn;
+                    reader = cmd.ExecuteReader();
 
-                if (reader.HasRows) {
-                    reader.Read();
-                    string nombre = (string)reader["Nombre"];
-                    string apellidos = (string)reader["Apellidos"];
-                    DateTime fechaNac = (DateTime)reader["FechaNacimiento"];
-                    string foto = "No disponible";
-                    if (reader["Foto"] != System.DBNull.Value)
+                    if (reader.HasRows)
                     {
-                        foto = (string)reader["Foto"];
-                    }
-                    string direccion = (string)reader["Direccion"];
-                    string telefono = (string)reader["Telefono"];
-                    int idDepto = (int)reader["IDDepartamento"];
+                        reader.Read();
+                        string nombre = (string)reader["Nombre"];
+                        string apellidos = (string)reader["Apellidos"];
+                        DateTime fechaNac = (DateTime)reader["FechaNacimiento"];
+                        string foto = "No disponible";
+                        if (reader["Foto"] != System.DBNull.Value)
+                        {
+                            foto = (string)reader["Foto"];
+                        }
+                        string direccion = (string)reader["Direccion"];
+                        string telefono = (string)reader["Telefono"];
+                        int idDepto = (int)reader["IDDepartamento"];
 
-                    persona = new Persona(id, nombre, apellidos, foto, telefono, direccion, fechaNac, idDepto);
+                        persona = new Persona(id, nombre, apellidos, foto, telefono, direccion, fechaNac, idDepto);
+                    }
+                    reader.Close();
+                    conn.Close();
                 }
-                reader.Close();
-                conn.Close();
-            }
-            catch (Exception e) {
-                throw e;
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
 
             return persona;
@@ -57,6 +63,7 @@ namespace DAL
 
         /// <summary>
         /// Agrega una persona a la base de datos
+        /// Pre: La persona debe estar llena
         /// </summary>
         /// <param name="persona">Persona a agregar</param>
         /// <returns>Devuelve el número de filas afectadas, si es uno es que se ha completado la operación.</returns>
@@ -86,6 +93,7 @@ namespace DAL
 
         /// <summary>
         /// Modifica una persona en la base de datos
+        /// Pre: Debe ser introducida una persona válida cuyos campos están rellenos
         /// </summary>
         /// <param name="persona">Persona a modificar</param>
         /// <returns>Devuelve el número de filas afectadas, si es uno es que se ha completado la operación.</returns>
@@ -120,6 +128,7 @@ namespace DAL
 
         /// <summary>
         /// Elimina una persona de la base de datos
+        /// Pre: El id debe ser mayor a 0
         /// </summary>
         /// <param name="id">Id de la persona a borrar</param>
         /// <returns>Devuelve el número de filas afectadas, si es uno es que se ha completado la operación.</returns>
@@ -128,15 +137,19 @@ namespace DAL
             SqlCommand cmd = new SqlCommand();
             cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
 
-            try
+            if(id > 0)
             {
-                SqlConnection conn = ConexionDB.GetConexion();
-                cmd.CommandText = "DELETE FROM Personas WHERE ID = @id";
-                cmd.Connection = conn;
-                affectedRows = cmd.ExecuteNonQuery();
-            }
-            catch (Exception e) {
-                throw e;
+                try
+                {
+                    SqlConnection conn = ConexionDB.GetConexion();
+                    cmd.CommandText = "DELETE FROM Personas WHERE ID = @id";
+                    cmd.Connection = conn;
+                    affectedRows = cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
 
             return affectedRows;
