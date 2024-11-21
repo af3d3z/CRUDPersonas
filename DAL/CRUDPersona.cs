@@ -114,7 +114,7 @@ namespace DAL
             {
 
                 SqlConnection conn = ConexionDB.GetConexion();
-                cmd.CommandText = "UPDATE Personas SET Nombre = @nombre, Apellidos = @apellidos, Telefono = @telefono, Direccion = @direccion, Foto = @foto, FechaNacimento = fechaNac, IDDepartamento = @idDepartamento WHERE ID = @id";
+                cmd.CommandText = "UPDATE Personas SET Nombre = @nombre, Apellidos = @apellidos, Telefono = @telefono, Direccion = @direccion, Foto = @foto, FechaNacimiento = @fechaNac, IDDepartamento = @idDepartamento WHERE ID = @id";
                 cmd.Connection = conn;
                 affectedRows = cmd.ExecuteNonQuery();
             }

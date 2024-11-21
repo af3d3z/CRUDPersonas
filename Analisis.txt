@@ -67,11 +67,11 @@ Capa DAL:
 
 			class PersonaDepartamentoListaDepartamentosVM
 				// atributos
-				- PersonaDepartamentoVM _personaDepartamento
-				- List<Departamento> _departamentos
+				- Persona _persona
+				- List<Departamento> _listadoDepartamentos
 				// propiedades
 				+ PersonaDepartamentoVM {get;set;}
-				+ Departamentos {get;}
+				+ ListadoDepartamentos {get;set;}
 				// constructores
 				+ PersonaListaDepartamentos()
-				+ PersonaListaDepartamentos(PersonaDepartamentoVM)
+				+ PersonaListaDepartamentos(Persona)

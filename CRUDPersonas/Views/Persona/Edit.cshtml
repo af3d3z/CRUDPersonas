@@ -10,21 +10,23 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="form-label" for="nombre">Nombre: </label>
+                <label class="form-label" for="ID">ID: </label>
+                <input disabled class="form-control" type="text" name="ID" value="@Model.Persona.ID" required />
+                <label class="form-label" for="Nombre">Nombre: </label>
                 <input class="form-control" type="text" name="Nombre" value="@Model.Persona.Nombre" required />
-                <label class="form-label" for="apellidos">Apellidos: </label>
+                <label class="form-label" for="Apellidos">Apellidos: </label>
                 <input class="form-control" type="text" name="Apellidos" value="@Model.Persona.Apellidos" required />
-                <label class="form-label" for="foto">URL Foto:</label>
+                <label class="form-label" for="Foto">URL Foto:</label>
                 <input class="form-control" type="text" name="Foto" value="@Model.Persona.Foto" required />
-                <label class="form-label" for="telefono">Teléfono:</label>
+                <label class="form-label" for="Telefono">Teléfono:</label>
                 <input class="form-control" name="Telefono" value="@Model.Persona.Telefono" required />
-                <label class="form-label" for="direccion">Dirección:</label>
+                <label class="form-label" for="Direccion">Dirección:</label>
                 <input class="form-control" type="text" name="Direccion" value="@Model.Persona.Direccion" required />
-                <label class="form-label" for="fechaNac">Fecha de nacimiento:</label>
-                <input class="form-control" type="date" name="FechaNacimiento" value="@Model.Persona.FechaNacimiento" required />
+                <label class="form-label" for="FechaNac">Fecha de nacimiento:</label>
+                <input class="form-control" type="date" name="FechaNacimiento" value="@Model.Persona.FechaNacimiento.ToString("yyyy-MM-dd")" required />
                 <label class="form-label" for="IDDepartamento">Departamento: </label>
                 <select class="form-select" name="IDDepartamento" required>
                     @foreach (var depto in Model.ListadoDepartamentos)
@@ -32,7 +34,7 @@
                         <option value="@depto.ID" selected='@(Model.Persona.IDDepartamento == depto.ID ? "selected" : "")'>@depto.Nombre</option>
                     }
                 </select>
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" style="margin: 5px"/>
             </div>
         </form>
     </div>

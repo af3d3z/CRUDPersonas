@@ -105,10 +105,14 @@ namespace CRUDPersonas.Controllers
         [HttpPost]
         [ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int id)
+        public ActionResult EditPost(Persona persona)
         {
             try
             {
+                int res = DAL.CRUDPersona.ModificarPersona(persona);
+                if (res != 1) {
+                    return View("Error", new ErrorVM(new Exception("No se pudo modificar la persona.")));
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
