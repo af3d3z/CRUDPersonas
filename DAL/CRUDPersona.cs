@@ -24,7 +24,7 @@ namespace DAL
             try
             {
                 SqlConnection conn = ConexionDB.GetConexion();
-                cmd.Parameters.AddWithValue("@id", "id");
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
                 cmd.CommandText = "SELECT * FROM Personas WHERE ID = @id";
                 cmd.Connection = conn;
                 reader = cmd.ExecuteReader();
@@ -63,7 +63,6 @@ namespace DAL
         public static int AgregarPersona(Persona persona) {
             int affectedRows = 0;
             SqlCommand cmd = new SqlCommand();
-            cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = persona.ID;
             cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = persona.Nombre;
             cmd.Parameters.Add("@apellidos", System.Data.SqlDbType.VarChar).Value = persona.Apellidos;
             cmd.Parameters.Add("@foto", System.Data.SqlDbType.VarChar).Value = persona.Foto;
@@ -74,7 +73,7 @@ namespace DAL
 
             try {
                 SqlConnection conn = ConexionDB.GetConexion();
-                cmd.CommandText = "INSERT INTO Personas VALUES (@id, @nombre, @apellidos, @telefono, @direccion, @foto, @fechaNac, @idDepartamento)";
+                cmd.CommandText = "INSERT INTO Personas VALUES (@nombre, @apellidos, @telefono, @direccion, @foto, @fechaNac, @idDepartamento)";
                 cmd.Connection = conn;
                 affectedRows = cmd.ExecuteNonQuery();
             }

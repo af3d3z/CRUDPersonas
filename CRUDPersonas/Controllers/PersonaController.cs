@@ -112,7 +112,7 @@ namespace CRUDPersonas.Controllers
         // POST: PersonaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Persona persona)
         {
             try
             {

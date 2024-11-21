@@ -5,7 +5,7 @@ namespace CRUDPersonas.Models.ViewModels
     public class PersonaDepartamentoVM
     {
         private Persona _persona;
-        private Departamento _departamento;
+        private String _departamento;
 
         public Persona Persona
         {
@@ -13,7 +13,7 @@ namespace CRUDPersonas.Models.ViewModels
             set { _persona = value; }
         }
 
-        public Departamento Departamento {
+        public String Departamento {
             get { return _departamento; }
             set { _departamento = value; }
         }
@@ -31,7 +31,7 @@ namespace CRUDPersonas.Models.ViewModels
             _persona = p;
             try
             {
-                _departamento = DAL.CRUDDepartamento.GetDepartamento(p.IDDepartamento);
+                _departamento = DAL.CRUDDepartamento.GetDepartamento(p.IDDepartamento).Nombre;
             }
             catch (Exception e) {
                 throw e;

@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.Persona.FechaNacimiento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Departamento.Nombre)
+                @Html.DisplayNameFor(model => model.Departamento)
             </th>
             <th></th>
         </tr>
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Persona.FechaNacimiento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Departamento.Nombre)
+                @Html.DisplayFor(modelItem => item.Departamento)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Persona.ID}) |
