@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vmodel="clr-namespace:CRUDPersonasMAUI.Models.ViewModels"
+             x:Class="CRUDPersonasMAUI.Views.MainPage">
+
+    <ContentPage.BindingContext>
+        <vmodel:ListaPersonasNombreDepartamento />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <ListView ItemsSource="{Binding ListaPersonasNombreDpto}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Nombre}"></Label>
+                                    <Label Text="{Binding Apellidos}"></Label>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
