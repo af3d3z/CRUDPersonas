@@ -22,7 +22,7 @@ namespace CRUDPersonas.Models.ViewModels
             _persona = p;
             try
             {
-                _listadoDepartamentos = DAL.Listados.GetListadoDepartamentosDAL();
+                _listadoDepartamentos = BL.Listados.GetListadoDepartamentosBL();
             }
             catch (Exception ex) {
                 throw ex;

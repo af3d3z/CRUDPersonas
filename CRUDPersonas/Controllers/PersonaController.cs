@@ -15,7 +15,7 @@ namespace CRUDPersonas.Controllers
             List<PersonaDepartamentoVM> personasDepartamento = new List<PersonaDepartamentoVM>();
             try
             {
-                List<Persona> personas = DAL.Listados.GetListadoPersonasDAL();
+                List<Persona> personas = BL.Listados.GetListadoPersonasBL();
                 foreach (Persona persona in personas)
                 {
                     PersonaDepartamentoVM personaDpto = new PersonaDepartamentoVM(persona);
@@ -38,7 +38,7 @@ namespace CRUDPersonas.Controllers
             PersonaDepartamentoVM persona = new PersonaDepartamentoVM();
             try
             {
-                persona = new PersonaDepartamentoVM(DAL.CRUDPersona.GetPersona(id));
+                persona = new PersonaDepartamentoVM(BL.ManejadoraPersonas.GetPersonaBL(id));
             }
             catch (Exception e) {
                 return View("Error", new ErrorVM(e));
@@ -52,7 +52,7 @@ namespace CRUDPersonas.Controllers
             List<Departamento> departamentos = new List<Departamento>();
             try
             {
-                departamentos = DAL.Listados.GetListadoDepartamentosDAL();
+                departamentos = BL.Listados.GetListadoDepartamentosBL();
             }
             catch (Exception e) {
                 throw e;
@@ -69,7 +69,7 @@ namespace CRUDPersonas.Controllers
 
             try
             {
-                int res = DAL.CRUDPersona.AgregarPersona(persona);
+                int res = BL.ManejadoraPersonas.AgregarPersonaBL(persona);
                 if (res != 1)
                 {
                     return View("Error", new ErrorVM(new Exception("No se ha podido añadir la persona")));
@@ -80,7 +80,7 @@ namespace CRUDPersonas.Controllers
                 return View("Error", new ErrorVM(e));
             }
             finally {
-                departamentos = DAL.Listados.GetListadoDepartamentosDAL();
+                departamentos = BL.Listados.GetListadoDepartamentosBL();
             }
             return View(departamentos);
 
@@ -93,7 +93,7 @@ namespace CRUDPersonas.Controllers
 
             try
             {
-                persona = new PersonaListaDepartamentos(DAL.CRUDPersona.GetPersona(id));
+                persona = new PersonaListaDepartamentos(BL.ManejadoraPersonas.GetPersonaBL(id));
             }
             catch (Exception e) {
                 return View("Error", new ErrorVM(e));
@@ -127,7 +127,7 @@ namespace CRUDPersonas.Controllers
             Persona persona;
             try
             {
-                persona = DAL.CRUDPersona.GetPersona(id);
+                persona = BL.ManejadoraPersonas.GetPersonaBL(id);
             }
             catch (Exception e) {
                 return View("Error", new ErrorVM(e));
@@ -143,7 +143,7 @@ namespace CRUDPersonas.Controllers
         {
             try
             {
-                int res = DAL.CRUDPersona.BorrarPersona(id);
+                int res = BL.ManejadoraPersonas.BorrarPersonaBL(id);
                 if (res != 1) {
                     return View("Error", new ErrorVM(new Exception("No se ha podido borrar la persona")));
                 }

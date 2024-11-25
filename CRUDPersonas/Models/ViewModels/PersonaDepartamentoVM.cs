@@ -31,7 +31,7 @@ namespace CRUDPersonas.Models.ViewModels
             _persona = p;
             try
             {
-                _departamento = DAL.CRUDDepartamento.GetDepartamento(p.IDDepartamento).Nombre;
+                _departamento = BL.ManejadoraDepartamentos.GetDepartamentoBL(p.IDDepartamento).Nombre;
             }
             catch (Exception e) {
                 throw e;
