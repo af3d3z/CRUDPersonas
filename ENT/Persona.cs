@@ -1,4 +1,6 @@
-﻿namespace ENT
+﻿using System.Diagnostics;
+
+namespace ENT
 {
     public class Persona
     {
@@ -93,6 +95,17 @@
             this._direccion = direccion;
             this._fechaNacimiento = fechaNacimiento;
             this._idDepartamento = idDepartamento;
+        }
+
+        public Persona(Persona p) { 
+            this._id = p._id;
+            this._nombre = p._nombre;
+            this._apellidos = p._apellidos;
+            this._foto = p._foto;
+            this._telefono = p._telefono;
+            this._direccion = p._direccion;
+            this._fechaNacimiento = p._fechaNacimiento;
+            this._idDepartamento = p._idDepartamento;
         }
 
 

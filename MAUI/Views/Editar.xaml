@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.Views.Editar"
+             Title="Editar">
+    <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+            <Label HorizontalTextAlignment="Center" Text="Nombre:" VerticalOptions="Center"></Label>
+            <Entry HorizontalTextAlignment="Center" Text="{Binding Nombre}" MinimumWidthRequest="70" VerticalOptions="Center"></Entry>
+            <Label HorizontalTextAlignment="Center" Text="Apellidos:" VerticalOptions="Center"></Label>
+            <Entry HorizontalTextAlignment="Center" Text="{Binding Apellidos}" MinimumWidthRequest="70" VerticalOptions="Center"></Entry>
+            <Label HorizontalTextAlignment="Center" Text="URL Foto:" VerticalOptions="Center"></Label>
+            <Entry HorizontalTextAlignment="Center" Text="{Binding Foto}" MinimumWidthRequest="70" VerticalOptions="Center"></Entry>
+            <Label HorizontalTextAlignment="Center" Text="Fecha de nacimiento:" VerticalOptions="Center"></Label>
+            <Entry HorizontalTextAlignment="Center" Text="{Binding FechaNacimiento}" MinimumWidthRequest="70" VerticalOptions="Center"></Entry>
+            <Label HorizontalTextAlignment="Center" Text="Dirección:"></Label>
+            <DatePicker HorizontalOptions="Center" Date="{Binding Direccion}"></DatePicker>
+            <Label HorizontalTextAlignment="Center" Text="Teléfono:"></Label>
+            <Entry HorizontalTextAlignment="Center" Text="{Binding Telefono}"></Entry>
+            <Label HorizontalTextAlignment="Center" Text="Departamento:"></Label>
+            <ListView HorizontalOptions="Center" ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoSeleccionado}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Nombre}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        <HorizontalStackLayout Spacing="5">
+            <Button Command="{Binding BtnVolver}" BackgroundColor="Blue" ImageSource="arrow_left.png"></Button>
+            <Button Command="{Binding BtnGuardar}" BackgroundColor="Green" ImageSource="edit.png"></Button>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vmodel="clr-namespace:MAUI.Models.ViewModels"
+             x:Class="MAUI.Views.Agregar"
+             Title="Agregar">
+
+    <ContentPage.BindingContext>
+        <vmodel:AgregarVM/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout HorizontalOptions="Center" Padding="20" Spacing="5">
+        <Label HorizontalTextAlignment="Center" Text="Nombre:"></Label>
+        <Entry HorizontalTextAlignment="Center" Text="{Binding Nombre}" MaximumWidthRequest="200"></Entry>
+        <Label HorizontalTextAlignment="Center" Text="Apellidos:"></Label>
+        <Entry HorizontalTextAlignment="Center" Text="{Binding Apellidos}" MaximumWidthRequest="200"></Entry>
+        <Label HorizontalTextAlignment="Center" Text="Foto:"></Label>
+        <Entry HorizontalTextAlignment="Center" Text="{Binding Foto}" MaximumWidthRequest="200"></Entry>
+        <Label HorizontalTextAlignment="Center" Text="Dirección:"></Label>
+        <Entry HorizontalTextAlignment="Center" Text="{Binding Direccion}" MaximumWidthRequest="200"></Entry>
+        <Label HorizontalTextAlignment="Center" Text="Teléfono:"></Label>
+        <Entry HorizontalTextAlignment="Center" Text="{Binding Telefono}" MaximumWidthRequest="200"></Entry>
+        <Label HorizontalTextAlignment="Center" Text="Fecha de nacimiento:"></Label>
+        <DatePicker HorizontalOptions="Center" Date="{Binding FechaNacimiento}" Format="dd-MM-yyyy"></DatePicker>
+        <Label HorizontalTextAlignment="Center" Text="Departamento:"></Label>
+        <ListView HorizontalOptions="Center" MaximumWidthRequest="200" ItemsSource="{Binding ListaDepartamentos}" SelectedItem="{Binding DepartamentoSeleccionado}" Margin="10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label MaximumWidthRequest="200" HorizontalTextAlignment="Center" Text="{Binding Nombre}"></Label>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+            <Button Command="{Binding VolverBtn}" BackgroundColor="Blue" ImageSource="arrow_left.png"></Button>
+            <Button Command="{Binding AgregarBtn}" BackgroundColor="Green" ImageSource="add.png"></Button>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

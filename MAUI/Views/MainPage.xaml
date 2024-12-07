@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Appearing="ContentPage_Appearing"
+             xmlns:vmodel="clr-namespace:MAUI.Models.ViewModels"
+             x:Class="MAUI.Views.MainPage"
+             Title="Personas">
+
+    <ContentPage.BindingContext>
+        <vmodel:ListaPersonasConNombreDpto />
+    </ContentPage.BindingContext>
+
+    <!--<ContentPage.MenuBarItems>
+        <MenuBarItem Text="Personas">
+            <MenuFlyoutItem Text="Borrar" Command="{Binding BtnEliminarCommand}"></MenuFlyoutItem>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>-->
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <HorizontalStackLayout Spacing="5">
+                <Button Command="{Binding BtnAgregarCommand}" BackgroundColor="Green" ImageSource="add.png"></Button>
+                <Button Command="{Binding BtnEliminarCommand}" BackgroundColor="Red" ImageSource="trash.png"></Button>
+                <Button Command="{Binding BtnDetallesCommand}" BackgroundColor="Blue" ImageSource="eye.png"></Button>
+                <Button Command="{Binding BtnEditarCommand}" BackgroundColor="Purple" ImageSource="edit.png"/>
+            </HorizontalStackLayout>
+            <ListView ItemsSource="{Binding ListadoPersonasNombreDepartamento}" SelectedItem="{Binding PersonaSeleccionada}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout>
+                                <Image Source="{Binding Foto}" MaximumHeightRequest="100" MaximumWidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" Margin="10"></Image>
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                        <Label Text="{Binding Nombre}" FontSize="20"></Label>
+                                        <Label Text="{Binding Apellidos}" FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding NombreDepartamento}" FontSize="18"></Label>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
