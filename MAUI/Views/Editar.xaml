@@ -24,7 +24,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        <HorizontalStackLayout Spacing="5">
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
             <Button Command="{Binding BtnVolver}" BackgroundColor="Blue" ImageSource="arrow_left.png"></Button>
             <Button Command="{Binding BtnGuardar}" BackgroundColor="Green" ImageSource="edit.png"></Button>
         </HorizontalStackLayout>
